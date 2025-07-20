@@ -1,5 +1,3 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { useSearch } from "./data/useSearch.ts";
 
@@ -8,15 +6,6 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
       <div className="card">
         <input
           type="text"
@@ -25,10 +14,17 @@ function App() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div>{JSON.stringify(searchResults, null, 2)}</div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>
+        {searchResults?.items!.map((item) => (
+          <li key={item.id} className="card">
+            <div>{item.forks_count}</div>
+            <div>{item.stargazers_count}</div>
+            <div>{item.open_issues_count}</div>
+            <a href={item.url}>{item.name}</a>
+            <a href={item.owner?.url}>{item.owner?.name}</a>
+          </li>
+        ))}
+      </div>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import type { GitHubSearchOptions } from "./api.types.ts";
-import type { components } from "../github";
+import type { paths } from "../github";
 
 /**
  * API endpoint URLs for GitHub Rest API, either static or constructed with parameters
@@ -55,4 +55,6 @@ export const get = (url: RequestInfo | URL) => wrappedFetch(url);
 export const search = (query: string, options = {}) =>
   get(URLS.SEARCH(query, options)).catch((err) =>
     console.error(err.message),
-  ) as Promise<components["schemas"]["repo-search-result-item"]>;
+  ) as Promise<
+    paths["/search/repositories"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;

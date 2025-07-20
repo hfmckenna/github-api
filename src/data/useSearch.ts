@@ -1,12 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { search } from "./api.ts";
+import type { paths } from "../github";
 
 /**
  * Custom hook encapsulating everything needed to maintain a view of the data (or lack thereof) from the GitHub API
  */
 export const useSearch = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<any | null>(null);
+  const [searchResults, setSearchResults] = useState<
+    | paths["/search/repositories"]["get"]["responses"]["200"]["content"]["application/json"]
+    | null
+  >(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
