@@ -18,3 +18,18 @@ npm i
 # TODO: Install via CI pipeline for automated deployments
 npx openapi-typescript ./models/GitHubOpenApi.json -o ./src/github.d.ts
 ```
+
+## Running
+
+Ensure you've added a valid access token to the environment files, personal access tokens with Read access to metadata
+for searching public GitHub repos among other public data.
+
+There is an example file but all production secrets should be ignored.
+
+```shell
+VITE_GITHUB_TOKEN=my_token_here
+```
+
+### Dev Server
+
+Use `npm run dev` to run the Vite dev server for local development.

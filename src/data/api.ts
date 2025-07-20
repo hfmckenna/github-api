@@ -27,6 +27,14 @@ const wrappedFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
     ...init,
     headers: { authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}` },
   });
+  switch (res.status) {
+    case 304:
+      throw new Error("Not modified");
+    case 422:
+      throw new Error("Validation error");
+    case 503:
+      throw new Error("Service unavailable");
+  }
   if (!res.ok) {
     throw new Error("Error: " + res.status + " " + res.statusText);
   }
@@ -44,7 +52,7 @@ export const get = (url: RequestInfo | URL) => wrappedFetch(url);
  * @param query
  * @param options - {@link GitHubSearchOptions} to dictate how data should be returned
  */
-export const search: components["schemas"]["repo-search-result-item"] = (
-  query: string,
-  options = {},
-) => get(URLS.SEARCH(query, options)).catch(() => false);
+export const search = (query: string, options = {}) =>
+  get(URLS.SEARCH(query, options)).catch((err) =>
+    console.error(err.message),
+  ) as Promise<components["schemas"]["repo-search-result-item"]>;
