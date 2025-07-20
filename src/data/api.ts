@@ -1,5 +1,6 @@
 import type { GitHubSearchOptions } from "./api.types.ts";
 import type { paths } from "../github";
+import { marked } from "marked";
 
 /**
  * API endpoint URLs for GitHub Rest API, either static or constructed with parameters
@@ -75,5 +76,9 @@ export const search = (query: string, options = {}) =>
  */
 export const readme = (fullRepoName: string) =>
   get(URLS.README(fullRepoName), {
-    headers: { Accept: "application/vnd.github.raw" },
-  }).catch((err) => console.error(err.message)) as Promise<string>;
+    headers: { Accept: "application/json" },
+  })
+    .then((res) => res.content)
+    .then(atob)
+    .then(marked)
+    .catch((err) => console.error(err.message)) as Promise<string>;
