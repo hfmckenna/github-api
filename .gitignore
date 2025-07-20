@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environments
+http-client.private.env.json
+.env*
+!.env.example
