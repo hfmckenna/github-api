@@ -43,11 +43,7 @@ const wrappedFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
   if (!res.ok) {
     throw new Error("Error: " + res.status + " " + res.statusText);
   }
-  // @ts-ignore
-  if ((init?.headers["Accept"] as unknown as string).includes("json")) {
-    return res.json();
-  }
-  return res.text();
+  return res.json();
 };
 
 /**
@@ -66,7 +62,7 @@ export const get = (url: RequestInfo | URL, init?: RequestInit) =>
 export const search = (query: string, options = {}) =>
   get(URLS.SEARCH(query, options), {
     headers: { Accept: "application/json" },
-  }).catch((err) => console.error(err.message)) as Promise<
+  }) as Promise<
     paths["/search/repositories"]["get"]["responses"]["200"]["content"]["application/json"]
   >;
 
