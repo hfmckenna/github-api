@@ -1,4 +1,5 @@
 import type { GitHubSearchOptions } from "./api.types.ts";
+import type { components } from "../github";
 
 /**
  * API endpoint URLs for GitHub Rest API, either static or constructed with parameters
@@ -43,5 +44,7 @@ export const get = (url: RequestInfo | URL) => wrappedFetch(url);
  * @param query
  * @param options - {@link GitHubSearchOptions} to dictate how data should be returned
  */
-export const search = (query: string, options = {}) =>
-  get(URLS.SEARCH(query, options)).catch(() => false);
+export const search: components["schemas"]["repo-search-result-item"] = (
+  query: string,
+  options = {},
+) => get(URLS.SEARCH(query, options)).catch(() => false);

@@ -27,3 +27,4 @@ dist-ssr
 http-client.private.env.json
 .env*
 !.env.example
+src/github.d.ts
