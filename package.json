@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "npx openapi-typescript ./models/GitHubOpenApi.json -o ./src/github.d.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint . --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "npm run build && npm run dev"
   },
   "dependencies": {
     "react": "19.1.0",

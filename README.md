@@ -30,6 +30,9 @@ There is an example file but all production secrets should be ignored.
 VITE_GITHUB_TOKEN=my_token_here
 ```
 
+After that a convenience command `npm run start` can run all steps to ensure the repo is sound. Then it will start a Dev
+Server so you use it.
+
 ### Dev Server
 
 Use `npm run dev` to run the Vite dev server for local development.
